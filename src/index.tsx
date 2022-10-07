@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import Store from './Redux/Store';
+import 'react-app-polyfill/stable'
+import 'core-js'
+import "@coreui/coreui/dist/css/coreui.css"
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
