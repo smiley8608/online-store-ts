@@ -6,8 +6,11 @@
 @tailwind components;
 @tailwind utilities;
 
-.wrapper {
+
+  .wrapper-custom {
     width: 100%;
     will-change: auto;
-    transition: padding 0.5s;
-  }
+    transition: padding 0.15s;
+    }
+
+

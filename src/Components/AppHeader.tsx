@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import {
   CContainer,
@@ -10,6 +10,7 @@ import {
   CHeaderToggler,
   CNavLink,
   CNavItem,
+  CNavbarText
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
@@ -17,21 +18,31 @@ import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
 // import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
 import { logo } from '../assets/brand/logo'
-import { useAppDispatch } from '../Redux/Hook'
+import { useAppDispatch, useAppState } from '../Redux/Hook'
 import { sidebarToggle } from '../Redux/Slices/CommonSlice'
 
 const CHeaderBrandCustom = CHeaderBrand as any
 
 const AppHeader = () => {
   const dispatch = useAppDispatch()
-  // const sidebarShow = useAppState((state) => state.common.sidebarShow)
+  const auth = useAppState(state => state.user.auth)
+  const sidebarShow = useAppState((state) => state.common.sidebarShow)
 
   return (
     <CHeader position="sticky" className="mb-4">
       <CContainer fluid>
         <CHeaderToggler
           className="ps-1"
-          onClick={() => dispatch(sidebarToggle())}
+          onClick={() => {
+            dispatch(sidebarToggle())
+            const elemmain = document.getElementById("shrinked-custom") as HTMLDivElement
+            if(window.innerWidth >= 768){
+              elemmain.style.paddingLeft = "16em"
+              if(sidebarShow){
+                elemmain.style.paddingLeft = "0em"
+              }
+            }
+          }}
         >
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
@@ -40,16 +51,26 @@ const AppHeader = () => {
         </CHeaderBrandCustom>
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
-            <CNavLink to="/dashboard" component={NavLink}>
-              Dashboard
-            </CNavLink>
+            <Link className='tw-no-underline tw-text-slate-500 tw-mx-2' to={"/"}><CNavbarText>Store</CNavbarText></Link>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="#">Users</CNavLink>
+            <Link className='tw-no-underline tw-text-slate-500 tw-mx-2' to={"/cart"}><CNavbarText>Cart</CNavbarText></Link>
           </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">Settings</CNavLink>
-          </CNavItem>
+          {auth && <CNavItem>
+            <Link className='tw-no-underline tw-text-slate-500 tw-mx-2' to={"/u/orders"}><CNavbarText>Orders</CNavbarText></Link>
+          </CNavItem>}
+          {auth && <CNavItem>
+            <Link className='tw-no-underline tw-text-slate-500 tw-mx-2' to={"/u/profile"}><CNavbarText>Account</CNavbarText></Link>
+          </CNavItem>}
+          {auth && <CNavItem>
+            <Link className='tw-no-underline tw-text-slate-500 tw-mx-2' to={"/u/signout"}><CNavbarText>SignOut</CNavbarText></Link>
+          </CNavItem>}
+          {!auth && <CNavItem>
+            <Link className='tw-no-underline tw-text-slate-500 tw-mx-2' to={"/signin"}><CNavbarText>Sign In</CNavbarText></Link>
+          </CNavItem>}
+          {auth && <CNavItem>
+            <Link className='tw-no-underline tw-text-slate-500 tw-mx-2' to={"/signup"}><CNavbarText>Sign Up</CNavbarText></Link>
+          </CNavItem>}
         </CHeaderNav>
         <CHeaderNav>
           <CNavItem>

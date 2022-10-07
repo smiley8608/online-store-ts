@@ -22,28 +22,29 @@ import {
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 
-import avatar8 from './../../assets/images/avatars/8.jpg'
+const CDropdownToggleCustom = CDropdownToggle as any
+
 
 const AppHeaderDropdown = () => {
   return (
     <CDropdown variant="nav-item">
-      <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
-        <CAvatar src={avatar8} size="md" />
-      </CDropdownToggle>
+      <CDropdownToggleCustom placement="bottom-end" className="py-0" caret={false}>
+        <CAvatar src={"https://images.indulgexpress.com/uploads/user/imagelibrary/2022/9/9/original/Press_Photo_2_V2_revised.jpg"} size="md" />
+      </CDropdownToggleCustom>
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownHeader className="bg-light fw-semibold py-2">Account</CDropdownHeader>
         <CDropdownItem href="#">
           <CIcon icon={cilBell} className="me-2" />
-          Updates
+          Cart
           <CBadge color="info" className="ms-2">
-            42
+            4
           </CBadge>
         </CDropdownItem>
         <CDropdownItem href="#">
           <CIcon icon={cilEnvelopeOpen} className="me-2" />
-          Messages
+          Orders
           <CBadge color="success" className="ms-2">
-            42
+            33
           </CBadge>
         </CDropdownItem>
         <CDropdownItem href="#">
