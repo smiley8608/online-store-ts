@@ -3,6 +3,7 @@ import OpenRoute from "./Pages/OpenRoute";
 import { useAppState } from "./Redux/Hook";
 import Store from "./Pages/MainPages/Store";
 import MasterLayout from "./layout/MasterLayout";
+import Cart from "./Pages/MainPages/Cart";
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         {authStatus && <Route path="/u/*" element={<MasterLayout />} />}
         <Route index element={<Store />} />
+        <Route path='/cart' element={<Cart />} />
         <Route path="/*" element={<OpenRoute />} />
       </Routes>
     </BrowserRouter>
