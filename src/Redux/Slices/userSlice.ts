@@ -21,7 +21,7 @@ const initialState: InitialState = {
             country:"USA."
         }]
     },
-    auth: true
+    auth: false
 }
 
 export const userSlice = createSlice({

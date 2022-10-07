@@ -16,7 +16,7 @@ import navigation from './Navigator/Navigator'
 import { useAppDispatch, useAppState } from '../Redux/Hook'
 import { sidebarToggle } from '../Redux/Slices/CommonSlice'
 
-const CSidebarBrandCustom  = CSidebarBrand as any
+const CSidebarBrandCustom = CSidebarBrand as any
 const AppSidebar = () => {
   const dispatch = useAppDispatch()
   const unfoldable = useAppState((state) => state.common.sidebarUnfoldable)
@@ -28,7 +28,7 @@ const AppSidebar = () => {
       unfoldable={unfoldable}
       visible={sidebarShow}
       onVisibleChange={(visible) => {
-        dispatch({ type: 'set', sidebarShow: visible })
+        // dispatch({ type: 'set', sidebarShow: visible })
       }}
     >
       <CSidebarBrandCustom className="d-none d-md-flex" to="/">
@@ -42,7 +42,16 @@ const AppSidebar = () => {
       </CSidebarNav>
       <CSidebarToggler
         className="d-none d-lg-flex"
-        onClick={() => dispatch(sidebarToggle())}
+        onClick={() => {
+          dispatch(sidebarToggle())
+          const elemmain = document.getElementById("shrinked-custom") as HTMLDivElement
+          if (window.innerWidth >= 768) {
+            elemmain.style.paddingLeft = "16em"
+            if (sidebarShow) {
+              elemmain.style.paddingLeft = "0em"
+            }
+          }
+        }}
       />
     </CSidebar>
   )
