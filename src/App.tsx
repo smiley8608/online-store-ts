@@ -4,10 +4,24 @@ import OpenRoute from "./Pages/OpenRoute";
 import Store from "./Pages/MainPages/Store";
 import MasterLayout from "./layout/MasterLayout";
 import Cart from "./Pages/MainPages/Cart";
+import { useEffect } from "react";
+import { useAppDispatch } from "./Redux/Hook";
+import axios from "axios";
+import { initialize } from "./Redux/Slices/userSlice";
 
-function App() {
+const App = () => {
 
   // const authStatus = useAppState(state => state.user.auth)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    axios.get("/user/status")
+      .then(res => {
+        dispatch(initialize({ auth: res.data.auth, user: res.data.user }))
+      })
+
+  },[dispatch])
+
 
   return (
     <BrowserRouter>

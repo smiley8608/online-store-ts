@@ -8,6 +8,16 @@ import Store from './Redux/Store';
 import 'react-app-polyfill/stable'
 import 'core-js'
 import "@coreui/coreui/dist/css/coreui.css"
+import "antd/dist/antd.min.css"
+import axios from 'axios';
+
+
+axios.defaults.baseURL = "http://localhost:5000"
+
+let token = localStorage.getItem("jwt-token")
+if(token){
+  axios.defaults.headers.common['jwt-token'] = token
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -17,14 +17,14 @@ export interface Product {
 }
 
 export interface CartItem {
-    product: Product[],
+    product: Product,
     quantity: number
 }
 
 export interface User {
     _id: string,
-    firstname: string,
-    lastname: string,
+    fname: string,
+    lname: string,
     username: string,
     password: string,
     email: string,

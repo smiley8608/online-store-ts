@@ -1,51 +1,49 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
 import {
-    // cilBell,
-    // cilCalculator,
-    // cilChartPie,
-    // cilCursor,
-    // cilDescription,
-    cilDrop,
-    // cilNotes,
-    cilPencil,
-    // cilPuzzle,
-    cilSpeedometer,
-    // cilStar,
+    cilCart,
+    cilHome,
+    cilUser,
+    cilGift,
+    cilAccountLogout
 } from '@coreui/icons'
 // import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
-import { CNavItem, CNavTitle } from '@coreui/react'
+import { CNavItem } from '@coreui/react'
+
 
 const Navigator = [
     {
         component: CNavItem,
-        name: 'Dashboard',
-        to: '/dashboard',
-        icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-        badge: {
-            color: 'info',
-            text: 'NEW',
-        },
-    },
-    {
-        component: CNavTitle,
-        name: 'Theme',
+        name: 'Store',
+        to: '/',
+        icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
+        
     },
     {
         component: CNavItem,
-        name: 'Colors',
-        to: '/theme/colors',
-        icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+        name: 'Cart',
+        to: '/cart',
+        icon: <CIcon icon={cilCart} customClassName="nav-icon" />,
     },
     {
         component: CNavItem,
-        name: 'Typography',
-        to: '/theme/typography',
-        icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+        name: 'Profile',
+        to: '/u/profile',
+        icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
     },
     {
-        component: CNavTitle,
-        name: 'Components',
-    }]
+        component: CNavItem,
+        name: 'Orders',
+        to: '/u/orders',
+        icon: <CIcon icon={cilGift} customClassName="nav-icon" />,
+    },
+    {
+        component: CNavItem,
+        name: 'Signout',
+        to: '/u/signout',
+        icon: <CIcon icon={cilAccountLogout} customClassName="nav-icon" />,
+    },
+    
+]
 
 export default Navigator

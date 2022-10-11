@@ -37,7 +37,7 @@ const AppHeader = () => {
             dispatch(sidebarToggle())
             const elemmain = document.getElementById("shrinked-custom") as HTMLDivElement
             if(window.innerWidth >= 768){
-              elemmain.style.paddingLeft = "16em"
+              elemmain.style.paddingLeft = "18em"
               if(sidebarShow){
                 elemmain.style.paddingLeft = "0em"
               }
