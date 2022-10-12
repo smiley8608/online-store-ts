@@ -19,6 +19,11 @@ const App = () => {
       .then(res => {
         dispatch(initialize({ auth: res.data.auth, user: res.data.user }))
       })
+      .catch(err => {
+        if(err.response.status === 403){
+          localStorage.clear()
+        }
+      })
 
   },[dispatch])
 

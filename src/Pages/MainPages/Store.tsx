@@ -3,6 +3,7 @@ import AppFooter from '../../Components/AppFooter'
 import AppHeader from '../../Components/AppHeader'
 import AppSidebar from '../../Components/AppSidebar'
 import { CContainer, CSpinner } from '@coreui/react'
+import StoreLayout from '../../Components/Store/StoreLayout'
 const Store = () => {
   return (
     <div>
@@ -12,7 +13,7 @@ const Store = () => {
         <div className="body flex-grow-1 px-3">
           <CContainer lg>
             <Suspense fallback={<CSpinner color="primary" />}>
-              Store Welcomes you
+              <StoreLayout/>
             </Suspense>
           </CContainer>
         </div>

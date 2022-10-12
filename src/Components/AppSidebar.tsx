@@ -1,12 +1,8 @@
 import React from 'react'
 
 import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
 
 import { AppSidebarNav } from './AppSidebarNav'
-
-import { logoNegative } from '../assets/brand/logo-negative'
-import { sygnet } from '../assets/brand/sygnet'
 
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
@@ -15,6 +11,7 @@ import 'simplebar/dist/simplebar.min.css'
 import navigation from './Navigator/Navigator'
 import { useAppDispatch, useAppState } from '../Redux/Hook'
 import { sidebarToggle } from '../Redux/Slices/CommonSlice'
+import { Link } from 'react-router-dom'
 
 const CSidebarBrandCustom = CSidebarBrand as any
 const AppSidebar = () => {
@@ -32,8 +29,8 @@ const AppSidebar = () => {
       }}
     >
       <CSidebarBrandCustom className="d-none d-md-flex" to="/">
-        <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
-        <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} />
+        <Link to="/" className="sidebar-brand-full"><h1 className='mb-2 tw-font-fredoka tw-bg-gradient-to-r tw-from-orange-600 tw-to-pink-500  tw-text-transparent tw-object-fill tw-bg-clip-text'>KeyStone</h1></Link>
+        {/* <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} /> */}
       </CSidebarBrandCustom>
       <CSidebarNav>
         <SimpleBar>
