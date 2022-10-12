@@ -52,7 +52,7 @@ const Filter = () => {
             open={open}
             onOpenChange={handleOpenChange}
             placement={"bottomRight"}
-           
+           className={"tw-col-start-2 tw-row-start-1 md:tw-col-start-auto md:tw-row-start-auto tw-col-span-1 md:tw-col-span-1 "}
         >
             <Button type="ghost">Filters</Button>
         </Popover>

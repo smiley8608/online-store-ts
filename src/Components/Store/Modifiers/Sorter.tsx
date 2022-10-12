@@ -26,7 +26,7 @@ const Sorter = () => {
 
     const SortContent = () => {
         return (
-            <div className='tw-w-60 tw-grid tw-grid-cols-1 tw-gap-1'>
+            <div className=' tw-col-span-1 md:tw-col-span-1 tw-w-60 tw-grid tw-grid-cols-1 tw-gap-1 '>
                 {/* <div className=' tw-text-gray-800 tw-text-lg tw-font-medium'>Price</div> */}
                 <div className=' tw-gap-1 tw-align-baseline'>
                     <input checked={"relevance" === priceRadios} type={"radio"} name="relevance" id='relevance' onChange={() => setpriceRadios("relevance")} /> <label htmlFor='relevance' onClick={hide}>Relevance</label><br />

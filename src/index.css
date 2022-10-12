@@ -7,10 +7,9 @@
 @tailwind utilities;
 
 
-  .wrapper-custom {
-    width: 100%;
-    will-change: auto;
-    transition: padding 0.15s;
-    }
-
+.wrapper-custom {
+  width: 100%;
+  will-change: auto;
+  transition: padding 0.15s;
+}
 

@@ -8,12 +8,15 @@ export interface Address {
 }
 
 export interface Product {
+    _id: string,
     title: string,
     description: string,
+    category: string,
     price: number,
     rating: number,
-    image: string,
-    imageList: string[]
+    stock: number,
+    thumbnail: string,
+    brand: string
 }
 
 export interface CartItem {
