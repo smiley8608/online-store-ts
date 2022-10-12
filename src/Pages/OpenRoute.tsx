@@ -14,7 +14,8 @@ const OpenRoute = () => {
 
   useEffect(() => {
     if (auth) {
-      navigate("/")
+      let entryurl = localStorage.getItem("entryurl") as string
+      navigate(entryurl)
     }
   }, [navigate, auth])
 

@@ -13,7 +13,7 @@ const App = () => {
 
   // const authStatus = useAppState(state => state.user.auth)
   const dispatch = useAppDispatch()
-
+  localStorage.setItem("entryurl", window.location.pathname)
   useEffect(() => {
     axios.get("/user/status")
       .then(res => {
