@@ -1,26 +1,19 @@
 import React from 'react'
 import { Input } from 'antd'
-import axios from 'axios'
 import { useAppDispatch } from '../../../Redux/Hook'
-import { initialize } from '../../../Redux/Slices/ProductSlice'
+import { changeModifiers } from '../../../Redux/Slices/CommonSlice'
+
 
 const Search = () => {
 
     const dispatch = useAppDispatch()
 
     const onSearch = (value: string) => {
-        console.log(value)
-        axios.get("/product/searchproduct?search="+value)
-        .then(searchProducts => {
-            dispatch(initialize(searchProducts.data.products))
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        dispatch(changeModifiers({ search: value }))
     }
 
     return (
-        <Input.Search className='tw-col-span-2 md:tw-col-span-4 lg:tw-w-1/2' placeholder="Search Products here..." onSearch={onSearch} enterButton  />
+        <Input.Search className='tw-col-span-2 md:tw-col-span-4 lg:tw-w-1/2' placeholder="Search Products here..." onSearch={onSearch} enterButton />
     )
 }
 

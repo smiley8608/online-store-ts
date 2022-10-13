@@ -9,30 +9,32 @@ import Search from './Modifiers/Search'
 
 
 const StoreLayout = () => {
+
+  const modifiers = useAppState(state => state.common.modifiers)
+
   const dispatch = useAppDispatch()
   useEffect(() => {
-    axios.get("/product/allproducts")
-    .then(prodFetchResponse => {
-      console.log(prodFetchResponse);
-      dispatch(initialize(prodFetchResponse.data.products))
-    })
-  },[dispatch])
+    axios.post(`/product/allproducts?rangestart=${modifiers.rangestart}&rangeend=${modifiers.rangeend}&sortby=${modifiers.sortby}&search=${modifiers.search}`, { category: modifiers.category })
+      .then(prodFetchResponse => {
+        dispatch(initialize(prodFetchResponse.data.products))
+      })
+  }, [dispatch, modifiers])
 
   const products = useAppState(state => state.product.products)
 
   return (
     <div className='tw-w-full'>
-        {/* Filter and Sorter */}
-        <div className='tw-grid tw-grid-cols-2 md:tw-grid-cols-6 lg:tw-flex tw-w-full tw-justify-between lg:tw-gap-8 tw-p-3'>
-            <Sorter/>
-            <Search/>
-            <Filter/>
-        </div>
-        <div className='tw-px-3 tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 tw-gap-2 md:tw-gap-3 lg:tw-gap-4'>
-          {products?.length as number > 0 ? <>
-            {products?.map(product => <Card key={product._id} product={product} />)}
-          </>:<h1>No Products Found</h1>}
-        </div>
+      {/* Filter and Sorter */}
+      <div className='tw-grid tw-grid-cols-2 md:tw-grid-cols-6 lg:tw-flex tw-w-full tw-justify-between lg:tw-gap-8 tw-p-3'>
+        <Sorter />
+        <Search />
+        <Filter />
+      </div>
+      <div className='tw-px-3 tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 tw-gap-2 md:tw-gap-3 lg:tw-gap-4'>
+        {products?.length as number > 0 ? <>
+          {products?.map(product => <Card key={product._id} product={product} />)}
+        </> : <h1>No Products Found</h1>}
+      </div>
     </div>
   )
 }

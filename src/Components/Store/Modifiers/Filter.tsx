@@ -1,19 +1,22 @@
 import { Button, Checkbox, Popover } from 'antd'
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 import React, { FormEvent, useState } from 'react'
+import { useAppDispatch } from '../../../Redux/Hook';
+import { changeModifiers } from '../../../Redux/Slices/CommonSlice';
 
 const Filter = () => {
 
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState<any>()
+    const dispatch = useAppDispatch()
 
     const handleOpenChange = (newOpen: boolean) => {
         setOpen(newOpen);
     };
 
     const onChange = (checkedValues: CheckboxValueType[]) => {
-        console.log(checkedValues);
         setValues(checkedValues)
+        dispatch(changeModifiers({ category: checkedValues}))
     };
 
     const options = [
