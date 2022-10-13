@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import {
   CContainer,
   CHeader,
-  CHeaderBrand,
+  // CHeaderBrand,
   // CHeaderDivider,
   CHeaderNav,
   CHeaderToggler,
@@ -17,16 +17,18 @@ import { cilCart, cilFlightTakeoff, cilGift, cilMenu } from '@coreui/icons'
 
 // import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
-import { logo } from '../assets/brand/logo'
+// import { logo } from '../assets/brand/logo'
 import { useAppDispatch, useAppState } from '../Redux/Hook'
 import { sidebarToggle } from '../Redux/Slices/CommonSlice'
 
-const CHeaderBrandCustom = CHeaderBrand as any
 
 const AppHeader = () => {
   const dispatch = useAppDispatch()
-  const auth = useAppState(state => state.user.auth)
+  const authStatus = useAppState(state => state.user.auth)
   const sidebarShow = useAppState((state) => state.common.sidebarShow)
+  let auth = authStatus;
+  
+
 
   return (
     <CHeader position="sticky" className="mb-4">
@@ -46,9 +48,9 @@ const AppHeader = () => {
         >
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
-        <CHeaderBrandCustom className="mx-auto d-md-none" to="/">
-          <CIcon icon={logo} height={48} />
-        </CHeaderBrandCustom>
+        <div className="mx-auto d-md-none">
+        <Link to="/" className="sidebar-brand-full"><h1 className='mb-2 tw-font-fredoka tw-bg-gradient-to-r tw-from-orange-600 tw-to-pink-500  tw-text-transparent tw-object-fill tw-bg-clip-text'>KeyStone</h1></Link>
+        </div>
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
             <Link className='tw-no-underline tw-text-slate-500 tw-mx-2' to={"/"}><CNavbarText>Store</CNavbarText></Link>
@@ -102,4 +104,4 @@ const AppHeader = () => {
   )
 }
 
-export default AppHeader
+export default React.memo(AppHeader)

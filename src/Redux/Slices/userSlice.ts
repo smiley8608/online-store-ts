@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { InitialState } from "../../types"
+import { CartItem, InitialState } from "../../types"
 
 
 // const initialState: InitialState = {
@@ -36,9 +36,14 @@ export const userSlice = createSlice({
         initialize: (state: InitialState, action: PayloadAction<InitialState>) => {
             state.user = action.payload.user
             state.auth = action.payload.auth
+        },
+        replaceCart: (state: InitialState, action: PayloadAction<CartItem[]>) => {
+            if (state.user) {
+                state.user.cart = action.payload
+            }
         }
     }
 })
 
-export const { initialize } = userSlice.actions
+export const { initialize, replaceCart } = userSlice.actions
 export default userSlice.reducer

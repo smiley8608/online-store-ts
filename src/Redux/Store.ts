@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit"
+import CartReducer from "./Slices/CartSlice"
 import CommonReducer from "./Slices/CommonSlice"
 import ProductReducer from "./Slices/ProductSlice"
 import userReducer from "./Slices/userSlice"
@@ -7,7 +8,8 @@ const Store = configureStore({
     reducer: {
         user: userReducer,
         common: CommonReducer,
-        product: ProductReducer
+        product: ProductReducer,
+        cart: CartReducer
     }
 })
 

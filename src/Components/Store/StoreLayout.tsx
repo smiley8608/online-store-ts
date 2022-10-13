@@ -9,13 +9,14 @@ import Search from './Modifiers/Search'
 
 
 const StoreLayout = () => {
-
+  
   const modifiers = useAppState(state => state.common.modifiers)
-
+  
   const dispatch = useAppDispatch()
   useEffect(() => {
     axios.post(`/product/allproducts?rangestart=${modifiers.rangestart}&rangeend=${modifiers.rangeend}&sortby=${modifiers.sortby}&search=${modifiers.search}`, { category: modifiers.category })
-      .then(prodFetchResponse => {
+    .then(prodFetchResponse => {
+        console.log("Fetch again");
         dispatch(initialize(prodFetchResponse.data.products))
       })
   }, [dispatch, modifiers])
@@ -39,4 +40,4 @@ const StoreLayout = () => {
   )
 }
 
-export default StoreLayout
+export default React.memo(StoreLayout)

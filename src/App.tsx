@@ -1,31 +1,57 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import OpenRoute from "./Pages/OpenRoute";
-// import { useAppState } from "./Redux/Hook";
+import { useAppState } from "./Redux/Hook";
 import Store from "./Pages/MainPages/Store";
+import Details from "./Pages/MainPages/Details";
 import MasterLayout from "./layout/MasterLayout";
 import Cart from "./Pages/MainPages/Cart";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useAppDispatch } from "./Redux/Hook";
 import axios from "axios";
-import { initialize } from "./Redux/Slices/userSlice";
+import { initialize, replaceCart } from "./Redux/Slices/userSlice";
+import { initializeCart } from "./Redux/Slices/CartSlice";
+import { message } from "antd";
+
+// To fix the cart
 
 const App = () => {
 
-  // const authStatus = useAppState(state => state.user.auth)
+  const authStatus = useAppState(state => state.user.auth)
+  const cart = useAppState(state => state.cart.cart)
   const dispatch = useAppDispatch()
   localStorage.setItem("entryurl", window.location.pathname)
   useEffect(() => {
+
+    let tempcart = localStorage.getItem("cart")
+    if(tempcart){
+      dispatch(initializeCart(JSON.parse(tempcart)))
+    } else {
+      dispatch(initializeCart([]))
+    }
+
     axios.get("/user/status")
       .then(res => {
         dispatch(initialize({ auth: res.data.auth, user: res.data.user }))
       })
       .catch(err => {
-        if(err.response.status === 403){
+        if (err.response.status === 403) {
           localStorage.clear()
         }
       })
 
-  },[dispatch])
+    if (authStatus) {
+      axios.post("/user/cartreplace", { cart: cart })
+      .then(response => {
+        dispatch(replaceCart(response.data.cart))
+      })
+      .catch(err => {
+        console.log(err);
+        message.error("Cannot update the cart correctly")
+      })
+    }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, authStatus])
 
 
   return (
@@ -33,6 +59,7 @@ const App = () => {
       <Routes>
         <Route path="/u/*" element={<MasterLayout />} />
         <Route index element={<Store />} />
+        <Route path="/details/:id" element={<Details />} />
         <Route path='/cart' element={<Cart />} />
         <Route path="/*" element={<OpenRoute />} />
       </Routes>
@@ -40,4 +67,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default React.memo(App);
