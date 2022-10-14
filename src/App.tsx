@@ -17,6 +17,7 @@ import { message } from "antd";
 const App = () => {
 
   const authStatus = useAppState(state => state.user.auth)
+  const userCart = useAppState(state => state.user.user?.cart)
   const cart = useAppState(state => state.cart.cart)
   const dispatch = useAppDispatch()
   localStorage.setItem("entryurl", window.location.pathname)
@@ -29,13 +30,14 @@ const App = () => {
       dispatch(initializeCart([]))
     }
 
+    console.log("hello");
     axios.get("/user/status")
       .then(res => {
         dispatch(initialize({ auth: res.data.auth, user: res.data.user }))
       })
       .catch(err => {
         if (err.response.status === 403) {
-          localStorage.clear()
+          localStorage.removeItem("jwt-token")
         }
       })
 
@@ -43,6 +45,7 @@ const App = () => {
       axios.post("/user/cartreplace", { cart: cart })
       .then(response => {
         dispatch(replaceCart(response.data.cart))
+        localStorage.removeItem("cart")
       })
       .catch(err => {
         console.log(err);
@@ -67,4 +70,4 @@ const App = () => {
   );
 }
 
-export default React.memo(App);
+export default App

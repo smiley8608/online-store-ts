@@ -7,8 +7,8 @@ const CommonSlice = createSlice({
         sidebarUnfoldable: false,
         modifiers: {
             sortby: "relevance",
-            rangestart: "10",
-            rangeend: "50000",
+            rangestart: 10,
+            rangeend: 50000,
             category: [] as string[],
             search:""
         }

@@ -1,13 +1,22 @@
 import { Button } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useAppState } from '../../Redux/Hook'
+import { useAppDispatch, useAppState } from '../../Redux/Hook'
+import { refreshCart } from '../../Redux/Slices/CartSlice'
 import Card from './Cards/Card'
 
 const CartLayout = () => {
 
     const cart = useAppState(state => state.cart.cart)
     const auth = useAppState(state => state.user.auth)
+    const user = useAppState(state => state.user.user)
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+        if(auth && user?.cart){
+            dispatch(refreshCart(user.cart))
+        }
+    },[auth, dispatch, user?.cart])
+    
 
     return (
         <div className='tw-w-full'>

@@ -19,7 +19,7 @@ const StoreLayout = () => {
         console.log("Fetch again");
         dispatch(initialize(prodFetchResponse.data.products))
       })
-  }, [dispatch, modifiers])
+  }, [dispatch, modifiers.category, modifiers.rangeend, modifiers.rangestart, modifiers.search, modifiers.sortby])
 
   const products = useAppState(state => state.product.products)
 

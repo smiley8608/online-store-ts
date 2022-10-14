@@ -28,6 +28,7 @@ export const handleCartAdd = (product: Product, auth: boolean, cart: CartItem[])
     if (auth) {
       axios.post("/user/cartreplace", { cart: newCart })
         .then(responseCart => {
+          localStorage.removeItem("cart")
           return responseCart.data.cart
         })
         .catch(err => {
@@ -49,6 +50,7 @@ export const handleCartAdd = (product: Product, auth: boolean, cart: CartItem[])
     if (auth) {
       axios.post("/user/cartreplace", { cart: cart })
         .then(responseCart => {
+          localStorage.removeItem("cart")
           return responseCart.data.cart
         })
         .catch(err => {

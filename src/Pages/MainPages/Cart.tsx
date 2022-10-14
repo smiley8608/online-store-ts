@@ -4,7 +4,10 @@ import AppHeader from '../../Components/AppHeader'
 import AppSidebar from '../../Components/AppSidebar'
 import { CContainer, CSpinner } from '@coreui/react'
 import CartLayout from '../../Components/Cart/CartLayout'
+
 const Cart = () => {
+  
+
   return (
 
     <div>

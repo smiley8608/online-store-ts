@@ -12,7 +12,7 @@ import "antd/dist/antd.min.css"
 import axios from 'axios';
 
 
-axios.defaults.baseURL = "http://192.168.0.125:5000"
+axios.defaults.baseURL = "http://localhost:5000"
 
 let token = localStorage.getItem("jwt-token")
 if(token){
