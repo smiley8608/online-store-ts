@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Navigate, Route, Routes, useNavigate, } from 'react-router-dom'
+import { Route, Routes, useNavigate, } from 'react-router-dom'
 import { useAppState } from '../Redux/Hook'
 import Error404 from './openPages/Error404'
 import Error500 from './openPages/Error500'
@@ -15,19 +15,20 @@ const OpenRoute = () => {
   useEffect(() => {
     if (auth) {
       let entryurl = localStorage.getItem("entryurl") as string
+      localStorage.removeItem("entryurl")
       navigate(entryurl)
     }
   }, [navigate, auth])
 
   return (
     <>
-      {!auth ? <Routes>
+      {<Routes>
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/forgotpassword' element={<ForgotPassword />} />
         <Route path='/internalservererror' element={<Error500 />} />
         <Route path='/*' element={<Error404 />} />
-      </Routes>:<Navigate to={"/"}/>}
+      </Routes>}
     </>
   )
 }

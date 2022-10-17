@@ -11,7 +11,8 @@ const Signout = () => {
     message.success("Signed out successfully")
     setTimeout(() => {
       dispatch(initialize({auth:false, user:null}))
-      localStorage.clear()
+      localStorage.removeItem("jwt-token")
+      localStorage.removeItem("cart")
       window.location.pathname = "/"
     }, 2000);
   },[dispatch,navigate])

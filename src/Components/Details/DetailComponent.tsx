@@ -21,6 +21,7 @@ const DetailComponent = () => {
                 message.error(err.message)
             })
     }, [params.id])
+    localStorage.removeItem("entryurl")
 
     return (
         <div className='tw-w-full'>

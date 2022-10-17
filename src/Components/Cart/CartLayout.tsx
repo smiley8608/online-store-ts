@@ -3,19 +3,30 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppState } from '../../Redux/Hook'
 import { refreshCart } from '../../Redux/Slices/CartSlice'
+import { CartItem } from '../../types'
 import Card from './Cards/Card'
 
 const CartLayout = () => {
 
-    const cart = useAppState(state => state.cart.cart)
+    let cart:CartItem[];
+    
+    // const cart = useAppState(state => state.cart.cart)
     const auth = useAppState(state => state.user.auth)
+    const authcart = useAppState(state => state.user.user?.cart)
+    const nonauthcart = useAppState(state => state.cart.cart)
+    if(auth){
+        cart = authcart
+    } else {
+        cart = nonauthcart
+    }
     const user = useAppState(state => state.user.user)
     const dispatch = useAppDispatch()
     useEffect(() => {
         if(auth && user?.cart){
-            dispatch(refreshCart(user.cart))
+            dispatch(refreshCart([]))
         }
     },[auth, dispatch, user?.cart])
+    localStorage.removeItem("entryurl")
     
 
     return (

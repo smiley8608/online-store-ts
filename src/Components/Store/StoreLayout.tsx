@@ -22,7 +22,7 @@ const StoreLayout = () => {
   }, [dispatch, modifiers.category, modifiers.rangeend, modifiers.rangestart, modifiers.search, modifiers.sortby])
 
   const products = useAppState(state => state.product.products)
-
+  localStorage.removeItem("entryurl")
   return (
     <div className='tw-w-full'>
       {/* Filter and Sorter */}

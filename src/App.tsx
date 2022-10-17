@@ -17,7 +17,7 @@ import { message } from "antd";
 const App = () => {
 
   const authStatus = useAppState(state => state.user.auth)
-  const userCart = useAppState(state => state.user.user?.cart)
+  // const userCart = useAppState(state => state.user.user?.cart)
   const cart = useAppState(state => state.cart.cart)
   const dispatch = useAppDispatch()
   localStorage.setItem("entryurl", window.location.pathname)
@@ -34,6 +34,7 @@ const App = () => {
     axios.get("/user/status")
       .then(res => {
         dispatch(initialize({ auth: res.data.auth, user: res.data.user }))
+        
       })
       .catch(err => {
         if (err.response.status === 403) {
@@ -52,7 +53,7 @@ const App = () => {
         message.error("Cannot update the cart correctly")
       })
     }
-
+    localStorage.removeItem("entryurl")
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, authStatus])
 
