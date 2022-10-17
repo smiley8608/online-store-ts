@@ -30,7 +30,7 @@ const Orders = () => {
   if (!auth) {
     return (
         <div className="container wow fadeIn">
-            <Link to={"/signin"}><h2>Sign in to Checkout</h2></Link>
+            <Link to={"/signin"}><h2>Sign in to view Orders</h2></Link>
         </div>
     )
 }

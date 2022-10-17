@@ -32,7 +32,7 @@ export interface User {
     username: string,
     password: string,
     email: string,
-    phone: string,
+    phonenumber: number,
     address: Address[],
     cart: Array
 }
