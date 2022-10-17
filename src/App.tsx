@@ -34,6 +34,7 @@ const App = () => {
     axios.get("/user/status")
       .then(res => {
         dispatch(initialize({ auth: res.data.auth, user: res.data.user }))
+        console.log(res);
         
       })
       .catch(err => {

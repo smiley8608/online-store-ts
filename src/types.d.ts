@@ -4,7 +4,8 @@ export interface Address {
     locality: string,
     city: string,
     state: string
-    country: string
+    country: string,
+    pincode: string
 }
 
 export interface Product {
