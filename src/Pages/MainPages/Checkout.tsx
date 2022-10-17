@@ -40,7 +40,7 @@ const Checkout = () => {
         axios.post("/user/checkouts",{checkout:formState,user:user, cart, payable: total})
         .then(response => {
             message.success(response.data.message)
-            navigate("/orders")
+            navigate("/u/orders")
         })
         .catch(err => {
             message.error(err.response.data.message)

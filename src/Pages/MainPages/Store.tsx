@@ -6,6 +6,7 @@ import { CContainer, CSpinner } from '@coreui/react'
 import StoreLayout from '../../Components/Store/StoreLayout'
 import {ArrowUpwardOutlined} from "@mui/icons-material"
 const Store = () => {
+  console.log("Stroe");
   
   return (
     <div>

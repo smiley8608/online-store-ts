@@ -41,3 +41,18 @@ export interface InitialState {
     user: User | null,
     auth: boolean
 }
+
+export interface OrderItem {
+    _id ?: string,
+    payableAmount: string,
+    products: CartItem[],
+    address: Address,
+    paymentdetails: {
+        cardname: string,
+        cardnumber: string,
+        cardexp: string,
+        cardccv: string
+    } | null,
+    deliverIn: string,
+    user: User
+}

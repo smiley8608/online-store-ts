@@ -37,7 +37,7 @@ const CartLayout = () => {
                 </> : <h1>No Products Found</h1>}
             </div>
             <div className='tw-w-full tw-mt-5'>
-                {cart.length > 0 && auth ? 
+                {cart?.length > 0 && auth ? 
                 <Link to={"/u/checkout"}><Button type='ghost' className='tw-bg-teal-500 tw-w-10/12 tw-mx-auto tw-flex tw-flex-col tw-items-stretch tw-rounded-md'>Proceed to Check-out</Button></Link>:
                 <Link to={"/signin"}><Button type='ghost' className='tw-bg-amber-500 tw-w-10/12 tw-mx-auto tw-flex tw-flex-col tw-items-stretch tw-rounded-md' >SignIn to Check-out</Button></Link>}
             </div>

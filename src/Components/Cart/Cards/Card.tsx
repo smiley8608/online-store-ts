@@ -40,7 +40,7 @@ export const handleCartAdd = async (product: Product, auth: boolean, cart: CartI
     localStorage.setItem("cart", JSON.stringify(newCart))
     return newCart
   } else {
-    if (cart.length >= 1) {
+    if (cart?.length >= 1) {
       cart = [...cart, { product: product, quantity: 1 }]
     }
     else {
