@@ -22,7 +22,10 @@ const App = () => {
   const dispatch = useAppDispatch()
   localStorage.setItem("entryurl", window.location.pathname)
   useEffect(() => {
-
+    let token = localStorage.getItem("jwt-token")
+    if(token){
+      axios.defaults.headers.common['jwt-token'] = token
+    }
     let tempcart = localStorage.getItem("cart")
     if(tempcart){
       dispatch(initializeCart(JSON.parse(tempcart)))

@@ -13,6 +13,8 @@ const Orders = () => {
   const auth = useAppState(state => state.user.auth)
   const dispatch = useAppDispatch()
 
+  document.title = "KeyStone | Orders"
+
   useEffect(() => {
       axios.get("/user/orders")
       .then(response => {

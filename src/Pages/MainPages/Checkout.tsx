@@ -6,7 +6,7 @@ import { useAppState } from "../../Redux/Hook";
 import { CartItem } from "../../types";
 
 const Checkout = () => {
-
+    document.title = "KeyStone | Checkout"
     const navigate = useNavigate()
 
     const user = useAppState((state) => state.user.user);

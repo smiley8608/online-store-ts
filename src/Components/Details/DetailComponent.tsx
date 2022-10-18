@@ -11,7 +11,7 @@ const DetailComponent = () => {
 
     const params = useParams()
     const [product, setProduct] = useState<Product>()
-
+    document.title = "KeyStone | " + params?.id
     useEffect(() => {
         axios.get("/product/specificproduct/" + params.id)
             .then(response => {

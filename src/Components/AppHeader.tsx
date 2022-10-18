@@ -65,7 +65,7 @@ const AppHeader = () => {
             <Link className='tw-no-underline tw-text-slate-500 tw-mx-2' to={"/u/profile"}><CNavbarText>Account</CNavbarText></Link>
           </CNavItem>}
           {auth && <CNavItem>
-            <Link className='tw-no-underline tw-text-slate-500 tw-mx-2' to={"/u/signout"}><CNavbarText>SignOut</CNavbarText></Link>
+            <Link className='tw-no-underline tw-text-slate-500 tw-mx-2' to={"/u/signout"} onClick={() => localStorage.setItem("entryurl","/u/signout")}><CNavbarText>SignOut</CNavbarText></Link>
           </CNavItem>}
           {!auth && <CNavItem>
             <Link className='tw-no-underline tw-text-slate-500 tw-mx-2' to={"/signin"}><CNavbarText>Sign In</CNavbarText></Link>

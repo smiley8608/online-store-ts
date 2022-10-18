@@ -5,6 +5,9 @@ import AppSidebar from '../../Components/AppSidebar'
 import { CContainer, CSpinner } from '@coreui/react'
 import DetailComponent from '../../Components/Details/DetailComponent'
 const Store = () => {
+
+  
+
   return (
     <div>
       <AppSidebar />

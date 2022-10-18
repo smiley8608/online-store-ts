@@ -6,7 +6,7 @@ import { CContainer, CSpinner } from '@coreui/react'
 import CartLayout from '../../Components/Cart/CartLayout'
 
 const Cart = () => {
-  
+  document.title = "KeyStone | Cart"
 
   return (
 

@@ -10,6 +10,9 @@ const Profile = () => {
   const auth = useAppState(state => state.user.auth)
   const [data, setData] = useState<any>()
   const [editmode, setEditmode] = useState(false)
+
+  document.title = "KeyStone | Profile - "+user?.username
+
   useEffect(() => {
     setData({
       username: user?.username,

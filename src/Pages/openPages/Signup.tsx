@@ -13,6 +13,7 @@ const Signup = () => {
   const [formdata, setFormdata] = useState<any>()
   const [showPass, setShowPass] = useState(false)
   const dispatch = useAppDispatch()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const navigate = useNavigate()
 
   const signupSubmitHandler = (e: FormEvent) => {
@@ -23,7 +24,10 @@ const Signup = () => {
       setTimeout(() => {
         localStorage.setItem("jwt-token", response.data.token)
         dispatch(initialize({auth: response.data.auth, user: response.data.user}))
-        navigate("/")
+        setTimeout(() => {
+          navigate("/")
+        }, 20);
+        // window.location.pathname = "/"
       }, 2000);
     })
     .catch(err => {

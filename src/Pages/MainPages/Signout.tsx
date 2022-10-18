@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom'
 const Signout = () => {
   const dispatch =useAppDispatch()
   const navigate = useNavigate()
+
+  document.title = "KeyStone | Signout"
+
   useEffect(() => {
     message.success("Signed out successfully")
     setTimeout(() => {
