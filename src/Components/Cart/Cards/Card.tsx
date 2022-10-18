@@ -27,7 +27,7 @@ export const handleCartAdd = async (product: Product, auth: boolean, cart: CartI
     localStorage.setItem("cart", JSON.stringify(newCart))
 
     if (auth) {
-      let promiser = await axios.post("/user/cartreplace", { cart: newCart })
+      let promiser = await axios.post("/user/cartreplace", { cart: newCart,decline:true })
       try {
         localStorage.removeItem("cart")
         return promiser.data.cart
@@ -50,7 +50,7 @@ export const handleCartAdd = async (product: Product, auth: boolean, cart: CartI
     // console.log("runner");
     if (auth) {
       try {
-        let promiser = await axios.post("/user/cartreplace", { cart: cart })
+        let promiser = await axios.post("/user/cartreplace", { cart: cart ,decline:true})
         localStorage.removeItem("cart")
         return promiser.data.cart
       } catch (error: any) {
@@ -106,7 +106,7 @@ export const handleCartRemove = async (product: Product, auth: boolean, cart: Ca
           return await handleCartDelete(filcheck[0].product, auth, cart)
         }
 
-        let promiser = await axios.post("/user/cartreplace", { cart: cart })
+        let promiser = await axios.post("/user/cartreplace", { cart: cart,decline:true })
         localStorage.removeItem("cart")
         return promiser.data.cart
       } catch (error: any) {
@@ -129,7 +129,7 @@ export const handleCartDelete = async (product: Product, auth: boolean, cart: Ca
   localStorage.setItem("cart", JSON.stringify(newCart))
   if (auth) {
     try {
-      let promiser = await axios.post("/user/cartdelete", { product: product })
+      let promiser = await axios.post("/user/cartdelete", { product: product,decline:true })
       localStorage.removeItem("cart")
       return promiser.data.cart
     } catch (error: any) {

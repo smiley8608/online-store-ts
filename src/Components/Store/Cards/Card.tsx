@@ -39,10 +39,10 @@ export const handleCartAdd = async (product: Product, auth: boolean, cart: CartI
         message.error(error.message)
       }
     } else {
-      setTimeout(() => {
+      
         localStorage.setItem("cart", JSON.stringify(newCart))
         return newCart
-      }, 20);
+      
     }
   } else {
     if (cart.length >= 1) {
@@ -94,7 +94,7 @@ const Card = ({ product }: Props): JSX.Element => {
           // console.log(resultCart);
 
           dispatch(replaceCart(resultCart as unknown as CartItem[]))
-          dispatch(replaceCartCSlice(auth ? []:resultCart as unknown as CartItem[]))
+          auth ? dispatch(replaceCartCSlice([])): dispatch(replaceCartCSlice(resultCart as unknown as CartItem[]))
         }}>Add to Cart</Button>
       </div>
     </div>

@@ -21,7 +21,6 @@ const CartLayout = () => {
     }
     const user = useAppState(state => state.user.user)
     const dispatch = useAppDispatch()
-    
     useEffect(() => {
         if(auth && user?.cart){
             dispatch(refreshCart([]))

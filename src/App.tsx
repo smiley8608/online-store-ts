@@ -28,11 +28,9 @@ const App = () => {
       axios.defaults.headers.common['jwt-token'] = token
     }
     let tempcart = localStorage.getItem("cart")
-    if(tempcart){
-      dispatch(initializeCart(JSON.parse(tempcart)))
-    } else {
-      dispatch(initializeCart([]))
-    }
+    
+      dispatch(initializeCart(JSON.parse(tempcart as string) || []))
+    
 
     // console.log("hello");
     axios.get("/user/status")
