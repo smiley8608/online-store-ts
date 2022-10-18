@@ -29,7 +29,7 @@ const SignIn = () => {
         setTimeout(() => {
           localStorage.setItem("jwt-token", response.data.token)
           dispatch(initialize({ auth: response.data.auth, user: response.data.user }))
-          window.location.pathname = "/"
+          // window.location.pathname = "/"
         }, 2000);
       })
       .catch(err => {
@@ -37,13 +37,21 @@ const SignIn = () => {
       })
   }
 
+  let entryurl = localStorage.getItem("entryurl") as string
   useEffect(() => {
     if (auth) {
-      let entryurl = localStorage.getItem("entryurl") as string
+      
       localStorage.removeItem("entryurl")
+      if(entryurl === "/signin"){
+        console.log("runs");
+        navigate("/")
+        localStorage.setItem("entryurl","/")
+        return
+      }
       navigate(entryurl)
     }
-  }, [navigate, auth])
+  },[auth, entryurl, navigate])
+
   return (
     <div className='tw-w-full tw-min-h-screen tw-grid tw-place-items-center' style={{ backgroundImage: "url('https://unsplash.com/photos/wvUs06Rtu5E/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8MTA1fHxiYWNrZ3JvdW5kfGVufDB8MHx8fDE2NjU0NzAzNTY&force=true&w=1920')" }}>
       <div className='tw-w-10/12 md:tw-w-1/2 lg:tw-w-2/3 xl:tw-w-2/5 tw-bg-white tw-border tw-border-slate-300 tw-mx-auto tw-rounded-md tw-shadow-xl tw-shadow-gray-800 tw-flex tw-flex-col lg:tw-flex-row'>

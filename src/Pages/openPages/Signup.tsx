@@ -18,21 +18,26 @@ const Signup = () => {
 
   const signupSubmitHandler = (e: FormEvent) => {
     e.preventDefault()
-    axios.post("/user/signup",formdata)
-    .then(response => {
-      message.success(response.data.message)
-      setTimeout(() => {
-        localStorage.setItem("jwt-token", response.data.token)
-        dispatch(initialize({auth: response.data.auth, user: response.data.user}))
-        setTimeout(() => {
-          navigate("/")
-        }, 20);
-        // window.location.pathname = "/"
-      }, 2000);
-    })
-    .catch(err => {
-      message.error("failed")
-    })
+    axios.post("/user/signup", formdata)
+      .then(response => {
+
+        if (response.data.auth) {
+          message.success(response.data.message)
+          setTimeout(() => {
+            localStorage.setItem("jwt-token", response.data.token)
+            dispatch(initialize({ auth: response.data.auth, user: response.data.user }))
+            setTimeout(() => {
+              navigate("/")
+            }, 20);
+            // window.location.pathname = "/"
+          }, 2000);
+        } else {
+          message.error(response.data.message)
+        }
+      })
+      .catch(err => {
+        message.error("failed")
+      })
   }
 
 
@@ -93,7 +98,7 @@ const Signup = () => {
                 </>
                 <>
                   <label htmlFor='password' className='tw-mt-3'>Password</label>
-                  <TextField error={formdata?.password === formdata?.conpassword || !formdata?.conpassword ? false : true } name='password' id='password' type={showPass ? "text":"password"} variant={"outlined"} size={"small"} InputProps={{
+                  <TextField error={formdata?.password === formdata?.conpassword || !formdata?.conpassword ? false : true} name='password' id='password' type={showPass ? "text" : "password"} variant={"outlined"} size={"small"} InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         <Key />
@@ -108,7 +113,7 @@ const Signup = () => {
                 </>
                 <>
                   <label htmlFor='conpassword' className='tw-mt-3'>Confirm Password</label>
-                  <TextField error={formdata?.password === formdata?.conpassword || !formdata?.conpassword ? false : true } name='conpassword' id='conpassword' type={showPass ? "text":"password"} variant={"outlined"} size={"small"} InputProps={{
+                  <TextField error={formdata?.password === formdata?.conpassword || !formdata?.conpassword ? false : true} name='conpassword' id='conpassword' type={showPass ? "text" : "password"} variant={"outlined"} size={"small"} InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         <Key />

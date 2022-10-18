@@ -21,6 +21,7 @@ const App = () => {
   const cart = useAppState(state => state.cart.cart)
   const dispatch = useAppDispatch()
   localStorage.setItem("entryurl", window.location.pathname)
+  // const navigate = useNavigate()
   useEffect(() => {
     let token = localStorage.getItem("jwt-token")
     if(token){
@@ -33,7 +34,7 @@ const App = () => {
       dispatch(initializeCart([]))
     }
 
-    console.log("hello");
+    // console.log("hello");
     axios.get("/user/status")
       .then(res => {
         dispatch(initialize({ auth: res.data.auth, user: res.data.user }))
@@ -41,6 +42,7 @@ const App = () => {
       .catch(err => {
         if (err.response.status === 403) {
           localStorage.removeItem("jwt-token")
+          
         }
       })
 

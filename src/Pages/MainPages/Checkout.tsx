@@ -11,7 +11,7 @@ const Checkout = () => {
 
     const user = useAppState((state) => state.user.user);
     const auth = useAppState((state) => state.user.auth);
-    const cart = useAppState((state) => state.user.user?.cart);
+    const cart = useAppState((state) => state.user.user?.cart as CartItem[]);
     const [formState, setState] = useState<any>();
 
     let total = 0;

@@ -34,7 +34,7 @@ export interface User {
     email: string,
     phonenumber: number,
     address: Address[],
-    cart: Array
+    cart: CartItem[]
 }
 
 export interface InitialState {

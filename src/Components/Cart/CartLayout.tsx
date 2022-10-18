@@ -15,12 +15,13 @@ const CartLayout = () => {
     const authcart = useAppState(state => state.user.user?.cart)
     const nonauthcart = useAppState(state => state.cart.cart)
     if(auth){
-        cart = authcart
+        cart = authcart as CartItem[]
     } else {
         cart = nonauthcart
     }
     const user = useAppState(state => state.user.user)
     const dispatch = useAppDispatch()
+    
     useEffect(() => {
         if(auth && user?.cart){
             dispatch(refreshCart([]))

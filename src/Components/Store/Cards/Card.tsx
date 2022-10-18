@@ -1,8 +1,9 @@
+import { LoadingOutlined } from '@ant-design/icons'
 import { Star } from '@mui/icons-material'
 import { Rating } from '@mui/material'
 import { Button, message, Statistic } from 'antd'
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppState } from '../../../Redux/Hook'
 import { replaceCartCSlice } from '../../../Redux/Slices/CartSlice'
@@ -16,7 +17,9 @@ interface Props {
 export const handleCartAdd = async (product: Product, auth: boolean, cart: CartItem[]) => {
   let check = cart?.filter(item => String(item.product._id) === String(product._id))
 
+  console.log("check", check);
   if (check?.length > 0) {
+
     let index = cart.findIndex(item => item.product._id === product._id)
     let filtration = cart.filter(item => item.product._id === product._id)
     let nonfilter = cart.filter(item => item.product._id !== product._id)
@@ -24,19 +27,20 @@ export const handleCartAdd = async (product: Product, auth: boolean, cart: CartI
     let newCart = [...nonfilter]
     newCart.splice(index, 0, { ...filtration[0], quantity: filtration[0].quantity + 1 })
 
-    localStorage.setItem("cart", JSON.stringify(newCart))
-    console.log("runs here");
+
+    // console.log("runs here");
     if (auth) {
+      localStorage.removeItem("cart")
       try {
         let promiser = await axios.post("/user/cartreplace", { cart: newCart })
-        localStorage.removeItem("cart")
         return promiser.data.cart
-      } catch (error:any) {
+      } catch (error: any) {
+        localStorage.setItem("cart", JSON.stringify(newCart))
         message.error(error.message)
       }
-      
     } else {
       setTimeout(() => {
+        localStorage.setItem("cart", JSON.stringify(newCart))
         return newCart
       }, 20);
     }
@@ -48,17 +52,19 @@ export const handleCartAdd = async (product: Product, auth: boolean, cart: CartI
       cart = [{ product: product, quantity: 1 }]
     }
     localStorage.setItem("cart", JSON.stringify(cart))
-    console.log("runner");
+    // console.log("runner");
     if (auth) {
-        let promiser = await axios.post("/user/cartreplace", { cart: cart })
-        try {
-          localStorage.removeItem("cart")
+      localStorage.removeItem("cart")
+      let promiser = await axios.post("/user/cartreplace", { cart: cart })
+      try {
         return promiser.data.cart
-        } 
-        catch(err:any){
-          console.log(err);
-          message.error(err.message)
-        }
+      }
+      catch (err: any) {
+        localStorage.setItem("cart", JSON.stringify(cart))
+        console.log(err);
+        message.error(err.message)
+      }
+      
     }
     return cart
 
@@ -69,7 +75,7 @@ const Card = ({ product }: Props): JSX.Element => {
   const auth = useAppState(state => state.user.auth)
   const cart = useAppState(state => state.cart.cart)
   const dispatch = useAppDispatch()
-
+  const [disabler, setDisabler] = useState(false)
   return (
     <div className='tw-rounded-sm md:tw-rounded-md tw-flex tw-flex-col tw-shadow-xl tw-bg-white tw-shadow-gray-300 tw-cursor-pointer' >
       <Link to={"/details/" + product._id} className='tw-w-full tw-bg-center tw-bg-contain tw-bg-no-repeat tw-rounded-t-sm md:tw-rounded-t-md' style={{ height: "300px", backgroundImage: `url(${product.thumbnail})` }}></Link>
@@ -79,12 +85,16 @@ const Card = ({ product }: Props): JSX.Element => {
         <div className='tw-mb-0 tw-my-1 tw-text-xl tw-text-gray-700 tw-flex tw-items-center'>Price: <span className='tw-text-xl tw-font-semibold tw-text-pink-600 tw-flex tw-items-center'>$<Statistic value={product.price} /></span></div>
         <Rating readOnly emptyIcon={<Star />} value={product.rating} precision={0.5} />
         <br />
-        <Button type='primary' className='tw-w-full' onClick={async() => {
+        <Button type='primary' icon={disabler ? <LoadingOutlined spin={true} /> : ""} className='tw-w-full' disabled={disabler ? true : false} onClick={async () => {
+          setDisabler(true)
+          setTimeout(() => {
+            setDisabler(false)
+          }, 1000);
           let resultCart = await handleCartAdd(product, auth, cart as CartItem[])
-          console.log(resultCart);
+          // console.log(resultCart);
 
           dispatch(replaceCart(resultCart as unknown as CartItem[]))
-          dispatch(replaceCartCSlice(resultCart as unknown as CartItem[]))
+          dispatch(replaceCartCSlice(auth ? []:resultCart as unknown as CartItem[]))
         }}>Add to Cart</Button>
       </div>
     </div>
